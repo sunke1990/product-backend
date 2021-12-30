@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.back.productbackend.db.ProductDetailMapper">
-  <resultMap id="BaseResultMap" type="com.back.productbackend.db.ProductDetail">
+<mapper namespace="com.back.productbackend.db.mapper.ProductDetailMapper">
+  <resultMap id="BaseResultMap" type="com.back.productbackend.db.model.ProductDetail">
     <!--@mbg.generated-->
     <!--@Table product_detail-->
     <id column="id" jdbcType="VARCHAR" property="id" />
@@ -32,7 +32,7 @@
     delete from product_detail
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.back.productbackend.db.ProductDetail">
+  <insert id="insert" parameterType="com.back.productbackend.db.model.ProductDetail">
     <!--@mbg.generated-->
     insert into product_detail (id, order_id, product_id, 
       product_name, product_price, product_quantity, 
@@ -43,7 +43,7 @@
       #{productIcon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{delFlag,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.back.productbackend.db.ProductDetail">
+  <insert id="insertSelective" parameterType="com.back.productbackend.db.model.ProductDetail">
     <!--@mbg.generated-->
     insert into product_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -111,7 +111,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.back.productbackend.db.ProductDetail">
+  <update id="updateByPrimaryKeySelective" parameterType="com.back.productbackend.db.model.ProductDetail">
     <!--@mbg.generated-->
     update product_detail
     <set>
@@ -145,7 +145,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.back.productbackend.db.ProductDetail">
+  <update id="updateByPrimaryKey" parameterType="com.back.productbackend.db.model.ProductDetail">
     <!--@mbg.generated-->
     update product_detail
     set order_id = #{orderId,jdbcType=VARCHAR},

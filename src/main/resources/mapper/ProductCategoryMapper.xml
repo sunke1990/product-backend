@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.back.productbackend.db.ProductCategoryMapper">
-  <resultMap id="BaseResultMap" type="com.back.productbackend.db.ProductCategory">
+<mapper namespace="com.back.productbackend.db.mapper.ProductCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.back.productbackend.db.model.ProductCategory">
     <!--@mbg.generated-->
     <!--@Table product_category-->
     <id column="id" jdbcType="INTEGER" property="id" />
@@ -27,14 +27,14 @@
     delete from product_category
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.back.productbackend.db.ProductCategory" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.back.productbackend.db.model.ProductCategory" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into product_category (`name`, category_type, create_time, 
       update_time, del_flag)
     values (#{name,jdbcType=VARCHAR}, #{categoryType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.back.productbackend.db.ProductCategory" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.back.productbackend.db.model.ProductCategory" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into product_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -72,7 +72,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.back.productbackend.db.ProductCategory">
+  <update id="updateByPrimaryKeySelective" parameterType="com.back.productbackend.db.model.ProductCategory">
     <!--@mbg.generated-->
     update product_category
     <set>
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.back.productbackend.db.ProductCategory">
+  <update id="updateByPrimaryKey" parameterType="com.back.productbackend.db.model.ProductCategory">
     <!--@mbg.generated-->
     update product_category
     set `name` = #{name,jdbcType=VARCHAR},

@@ -1,4 +1,4 @@
-package com.back.productbackend.db;
+package com.back.productbackend.db.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.back.productbackend.db.ProductOrderMapper">
-  <resultMap id="BaseResultMap" type="com.back.productbackend.db.ProductOrder">
+<mapper namespace="com.back.productbackend.db.mapper.ProductOrderMapper">
+  <resultMap id="BaseResultMap" type="com.back.productbackend.db.model.ProductOrder">
     <!--@mbg.generated-->
     <!--@Table product_order-->
     <id column="id" jdbcType="VARCHAR" property="id" />
@@ -32,7 +32,7 @@
     delete from product_order
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.back.productbackend.db.ProductOrder">
+  <insert id="insert" parameterType="com.back.productbackend.db.model.ProductOrder">
     <!--@mbg.generated-->
     insert into product_order (id, buyer_name, buyer_phone, 
       buyer_address, buyer_openid, order_amount, 
@@ -43,7 +43,7 @@
       #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{delFlag,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.back.productbackend.db.ProductOrder">
+  <insert id="insertSelective" parameterType="com.back.productbackend.db.model.ProductOrder">
     <!--@mbg.generated-->
     insert into product_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -111,7 +111,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.back.productbackend.db.ProductOrder">
+  <update id="updateByPrimaryKeySelective" parameterType="com.back.productbackend.db.model.ProductOrder">
     <!--@mbg.generated-->
     update product_order
     <set>
@@ -145,7 +145,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.back.productbackend.db.ProductOrder">
+  <update id="updateByPrimaryKey" parameterType="com.back.productbackend.db.model.ProductOrder">
     <!--@mbg.generated-->
     update product_order
     set buyer_name = #{buyerName,jdbcType=VARCHAR},

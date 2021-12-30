@@ -1,4 +1,4 @@
-package com.back.productbackend.db;
+package com.back.productbackend.db.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,50 +16,50 @@ import lombok.NoArgsConstructor;
 /**
     * 商品表
     */
-@ApiModel(value="com-back-productbackend-db-ProductOrder")
+@ApiModel(value="com-back-productbackend-db-ProductInfo")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductOrder {
+public class ProductInfo {
     @ApiModelProperty(value="")
     private String id;
 
     /**
-    * 买家名
+    * 商品名
     */
-    @ApiModelProperty(value="买家名")
-    private String buyerName;
+    @ApiModelProperty(value="商品名")
+    private String name;
 
     /**
-    * 买家手机号
+    * 商品价格
     */
-    @ApiModelProperty(value="买家手机号")
-    private String buyerPhone;
+    @ApiModelProperty(value="商品价格")
+    private BigDecimal price;
 
     /**
-    * 买家地址
+    * 库存
     */
-    @ApiModelProperty(value="买家地址")
-    private String buyerAddress;
+    @ApiModelProperty(value="库存")
+    private Integer stock;
 
     /**
-    * 买家微信openid
+    * 描述
     */
-    @ApiModelProperty(value="买家微信openid")
-    private String buyerOpenid;
+    @ApiModelProperty(value="描述")
+    private String description;
 
     /**
-    * 订单总金额
+    * 图标
     */
-    @ApiModelProperty(value="订单总金额")
-    private BigDecimal orderAmount;
+    @ApiModelProperty(value="图标")
+    private String icon;
 
     /**
-    * 订单状态,默认0新下单
+    * 类目编号
     */
-    @ApiModelProperty(value="订单状态,默认0新下单")
-    private Byte status;
+    @ApiModelProperty(value="类目编号")
+    private Integer categoryType;
 
     /**
     * 创建时间

@@ -1,4 +1,4 @@
-package com.back.productbackend.db;
+package com.back.productbackend.db.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,50 +16,50 @@ import lombok.NoArgsConstructor;
 /**
     * 商品表
     */
-@ApiModel(value="com-back-productbackend-db-ProductInfo")
+@ApiModel(value="com-back-productbackend-db-ProductDetail")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductInfo {
+public class ProductDetail {
     @ApiModelProperty(value="")
     private String id;
+
+    /**
+    * 订单id
+    */
+    @ApiModelProperty(value="订单id")
+    private String orderId;
+
+    /**
+    * 商品id
+    */
+    @ApiModelProperty(value="商品id")
+    private String productId;
 
     /**
     * 商品名
     */
     @ApiModelProperty(value="商品名")
-    private String name;
+    private String productName;
 
     /**
     * 商品价格
     */
     @ApiModelProperty(value="商品价格")
-    private BigDecimal price;
+    private BigDecimal productPrice;
 
     /**
-    * 库存
+    * 商品数量
     */
-    @ApiModelProperty(value="库存")
-    private Integer stock;
-
-    /**
-    * 描述
-    */
-    @ApiModelProperty(value="描述")
-    private String description;
+    @ApiModelProperty(value="商品数量")
+    private Integer productQuantity;
 
     /**
     * 图标
     */
     @ApiModelProperty(value="图标")
-    private String icon;
-
-    /**
-    * 类目编号
-    */
-    @ApiModelProperty(value="类目编号")
-    private Integer categoryType;
+    private String productIcon;
 
     /**
     * 创建时间

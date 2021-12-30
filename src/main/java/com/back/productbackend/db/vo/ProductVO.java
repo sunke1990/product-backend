@@ -1,4 +1,4 @@
-package com.back.productbackend.service;
+package com.back.productbackend.db.vo;
 
 /**
  * @author sunke

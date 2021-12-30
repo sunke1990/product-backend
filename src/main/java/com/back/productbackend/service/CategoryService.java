@@ -1,7 +1,7 @@
 package com.back.productbackend.service;
 
 
-import com.back.productbackend.db.ProductCategory;
+import com.back.productbackend.db.model.ProductCategory;
 
 import java.util.List;
 

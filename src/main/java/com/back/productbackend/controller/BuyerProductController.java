@@ -1,11 +1,11 @@
 package com.back.productbackend.controller;
 
-import com.back.productbackend.db.ProductInfo;
+import com.back.productbackend.db.model.ProductInfo;
 import com.back.productbackend.page.BusinessResult;
 import com.back.productbackend.page.Pagination;
 import com.back.productbackend.service.ProductInfoService;
 
-import com.back.productbackend.service.ProductVO;
+import com.back.productbackend.db.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
