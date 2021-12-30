@@ -1,7 +1,5 @@
 package com.back.productbackend.db;
 
-import com.back.productbackend.db.ProductOrder;
-
 /**
     * @author sunke
     * @DATE 2021/12/30
