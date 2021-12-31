@@ -159,4 +159,16 @@
       del_flag = #{delFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <insert id="insertBatch">
+    insert into product_info(id, name, price, stock, description, icon, category_type, create_time, update_time,
+                             del_flag) values
+    <foreach collection="infos" item="item" open="(" close=")" separator="),(">
+      #{item.id,jdbcType=VARCHAR},#{item.name,jdbcType=VARCHAR},
+      #{item.price,jdbcType=DECIMAL},#{item.stock,jdbcType=INTEGER},
+      #{item.description,jdbcType=VARCHAR},#{item.icon,jdbcType=VARCHAR},
+      #{item.categoryType,jdbcType=INTEGER},#{item.createTime,jdbcType=TIMESTAMP},
+      #{item.updateTime,jdbcType=TIMESTAMP},#{item.delFlag,jdbcType=TINYINT}
+    </foreach>
+  </insert>
 </mapper>

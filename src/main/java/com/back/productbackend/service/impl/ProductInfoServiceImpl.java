@@ -6,13 +6,17 @@ import com.back.productbackend.db.mapper.ProductInfoMapper;
 import com.back.productbackend.page.Pagination;
 import com.back.productbackend.service.ProductInfoService;
 import com.back.productbackend.db.vo.ProductVO;
+import com.back.productbackend.utils.TextUtil;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author sunke
@@ -37,12 +41,24 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     public void add(ProductInfo productInfo) {
+        productInfo.setId(IdWorker.getIdStr());
+        productInfo.setCreateTime(TextUtil.now());
+        productInfo.setUpdateTime(TextUtil.now());
+        int i = productInfoMapper.insert(productInfo);
+        System.out.println(String.format("---------------------->%d",i));
 
     }
 
     @Override
-    public void addSome(List<ProductInfo> productInfos) {
-
+    public void addSome(List<ProductInfo> list) {
+        List<ProductInfo> infos = list.stream().peek(v -> {
+            v.setId(IdWorker.getIdStr());
+            v.setCreateTime(TextUtil.now());
+            v.setUpdateTime(TextUtil.now());
+        }).collect(Collectors.toList());
+        if (infos.size() > 0){
+            productInfoMapper.insertBatch(infos);
+        }
     }
 
     @Override

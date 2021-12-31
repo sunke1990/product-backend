@@ -1,6 +1,9 @@
 package com.back.productbackend.db.mapper;
 
 import com.back.productbackend.db.model.ProductInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
     * @author sunke
@@ -18,4 +21,10 @@ public interface ProductInfoMapper {
     int updateByPrimaryKeySelective(ProductInfo record);
 
     int updateByPrimaryKey(ProductInfo record);
+
+    /**
+     * 批量插入
+     * @param infos
+     */
+    void insertBatch(@Param("infos") List<ProductInfo> infos);
 }
