@@ -1,7 +1,7 @@
 package com.back.productbackend.service.impl;
 
 
-import com.back.productbackend.db.model.ProductInfo;
+import com.back.productbackend.db.entity.ProductInfo;
 import com.back.productbackend.db.mapper.ProductInfoMapper;
 import com.back.productbackend.page.Pagination;
 import com.back.productbackend.service.ProductInfoService;
@@ -35,8 +35,19 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     public Pagination<ProductVO> findAll(Integer type, Integer pageIndex, Integer pageSize) {
-        Pagination.page(pageIndex,pageSize,() -> productInfoMapper.queryProsByCategoryType(type));
-        return null;
+        List<ProductInfo> infos = productInfoMapper.queryProsByCategoryType(type);
+        Pagination<ProductInfo> infoPagination = Pagination.<ProductInfo>page(pageIndex, pageSize,
+                () -> productInfoMapper.queryProsByCategoryType(type));
+        return infoPagination.transform(v -> ProductVO
+                .builder()
+                .id(v.getId())
+                .name(v.getName())
+                .price(v.getPrice())
+                .categoryType(v.getCategoryType())
+                .icon(v.getIcon())
+                .description(v.getDescription())
+                .createTime(v.getCreateTime())
+                .build());
     }
 
     @Override
@@ -45,8 +56,6 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         productInfo.setCreateTime(TextUtil.now());
         productInfo.setUpdateTime(TextUtil.now());
         int i = productInfoMapper.insert(productInfo);
-        System.out.println(String.format("---------------------->%d",i));
-
     }
 
     @Override

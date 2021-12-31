@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author admin
  */
 @SpringBootApplication
-@MapperScan("com.back.productbackend.db")
+@MapperScan("com.back.productbackend.db.mapper")
 public class ProductBackendApplication {
 
     public static void main(String[] args) {

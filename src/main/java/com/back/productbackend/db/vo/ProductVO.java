@@ -34,12 +34,6 @@ public class ProductVO {
     private BigDecimal price;
 
     /**
-     * 库存
-     */
-    @ApiModelProperty(value="库存")
-    private Integer stock;
-
-    /**
      * 描述
      */
     @ApiModelProperty(value="描述")
@@ -74,4 +68,5 @@ public class ProductVO {
      */
     @ApiModelProperty(value="0 未删除 1 删除")
     private Byte delFlag;
+
 }

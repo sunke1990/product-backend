@@ -1,6 +1,6 @@
 package com.back.productbackend.db.mapper;
 
-import com.back.productbackend.db.model.ProductDetail;
+import com.back.productbackend.db.entity.ProductDetail;
 
 /**
     * @author sunke

@@ -1,6 +1,7 @@
 package com.back.productbackend.db.mapper;
 
-import com.back.productbackend.db.model.ProductInfo;
+import com.back.productbackend.db.entity.ProductInfo;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
     * @author sunke
     * @DATE 2021/12/30
 **/
+@Mapper
 public interface ProductInfoMapper {
     int deleteByPrimaryKey(String id);
 

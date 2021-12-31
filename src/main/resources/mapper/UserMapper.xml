@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.productbackend.db.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.back.productbackend.db.entity.User">
+        <!--@Table user-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="openId" column="open_id" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="wxSessionKey" column="wx_session_key" jdbcType="VARCHAR"/>
+        <result property="wxFaceUrl" column="wx_face_url" jdbcType="VARCHAR"/>
+        <result property="wxName" column="wx_name" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="INTEGER"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="idNumber" column="id_number" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="unionId" column="union_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, open_id, phone, password, remark, wx_session_key, wx_face_url, wx_name, gender, real_name, id_number, create_time, update_time, union_id
+        from product.user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, open_id, phone, password, remark, wx_session_key, wx_face_url, wx_name, gender, real_name, id_number, create_time, update_time, union_id
+        from product.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, open_id, phone, password, remark, wx_session_key, wx_face_url, wx_name, gender, real_name, id_number, create_time, update_time, union_id
+        from product.user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="openId != null and openId != ''">
+                and open_id = #{openId}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="wxSessionKey != null and wxSessionKey != ''">
+                and wx_session_key = #{wxSessionKey}
+            </if>
+            <if test="wxFaceUrl != null and wxFaceUrl != ''">
+                and wx_face_url = #{wxFaceUrl}
+            </if>
+            <if test="wxName != null and wxName != ''">
+                and wx_name = #{wxName}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="realName != null and realName != ''">
+                and real_name = #{realName}
+            </if>
+            <if test="idNumber != null and idNumber != ''">
+                and id_number = #{idNumber}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="unionId != null and unionId != ''">
+                and union_id = #{unionId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into product.user(open_id, phone, password, remark, wx_session_key, wx_face_url, wx_name, gender, real_name, id_number, create_time, update_time, union_id)
+        values (#{openId}, #{phone}, #{password}, #{remark}, #{wxSessionKey}, #{wxFaceUrl}, #{wxName}, #{gender}, #{realName}, #{idNumber}, #{createTime}, #{updateTime}, #{unionId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update product.user
+        <set>
+            <if test="openId != null and openId != ''">
+                open_id = #{openId},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="wxSessionKey != null and wxSessionKey != ''">
+                wx_session_key = #{wxSessionKey},
+            </if>
+            <if test="wxFaceUrl != null and wxFaceUrl != ''">
+                wx_face_url = #{wxFaceUrl},
+            </if>
+            <if test="wxName != null and wxName != ''">
+                wx_name = #{wxName},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="realName != null and realName != ''">
+                real_name = #{realName},
+            </if>
+            <if test="idNumber != null and idNumber != ''">
+                id_number = #{idNumber},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="unionId != null and unionId != ''">
+                union_id = #{unionId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from product.user where id = #{id}
+    </delete>
+
+</mapper>

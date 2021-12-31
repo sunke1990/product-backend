@@ -1,6 +1,6 @@
 package com.back.productbackend.service;
 
-import com.back.productbackend.db.model.ProductInfo;
+import com.back.productbackend.db.entity.ProductInfo;
 import com.back.productbackend.db.vo.ProductVO;
 import com.back.productbackend.page.Pagination;
 
