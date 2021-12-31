@@ -16,7 +16,7 @@ public interface ProductInfoService {
 
     ProductInfo findOne(String id);
 
-    Pagination<ProductVO> findAll();
+    Pagination<ProductVO> findAll(Integer type, Integer pageIndex, Integer pageSize);
 
     void add(ProductInfo productInfo);
 

@@ -27,4 +27,11 @@ public interface ProductInfoMapper {
      * @param infos
      */
     void insertBatch(@Param("infos") List<ProductInfo> infos);
+
+    /**
+     * 根据商品类别获取列表
+     * @param type
+     * @return
+     */
+    List<ProductInfo> queryProsByCategoryType(@Param("type") Integer type);
 }

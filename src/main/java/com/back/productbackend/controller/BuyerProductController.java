@@ -32,8 +32,12 @@ public class BuyerProductController {
 
 
     @GetMapping("/list")
-    public BusinessResult<Pagination<ProductVO>> list(){
-        return BusinessResult.success(productInfoService.findAll());
+    public BusinessResult<Pagination<ProductVO>> list(
+            @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
+            @RequestParam(value = "type", required = true) Integer type
+    ){
+        return BusinessResult.success(productInfoService.findAll(type, pageIndex, pageSize));
     }
 
     @DeleteMapping("/delete")

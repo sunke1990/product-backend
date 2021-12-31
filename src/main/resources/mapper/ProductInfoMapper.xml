@@ -171,4 +171,25 @@
       #{item.updateTime,jdbcType=TIMESTAMP},#{item.delFlag,jdbcType=TINYINT}
     </foreach>
   </insert>
+  <!--根据商品类别获取列表，type为空时，返回全部商品前100条-->
+    <select id="queryProsByCategoryType" resultMap="BaseResultMap">
+        select id,
+               name,
+               price,
+               stock,
+               description,
+               icon,
+               category_type,
+               create_time,
+               update_time,
+               del_flag
+        from product_info
+        <if test="type != null">
+            where category_type = #{type,jdbcType=INTEGER}
+        </if>
+        order by create_time desc
+        <if test="type == null">
+            limit 100
+        </if>
+    </select>
 </mapper>

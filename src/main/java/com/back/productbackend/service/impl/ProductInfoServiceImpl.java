@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     }
 
     @Override
-    public Pagination<ProductVO> findAll() {
+    public Pagination<ProductVO> findAll(Integer type, Integer pageIndex, Integer pageSize) {
+        Pagination.page(pageIndex,pageSize,() -> productInfoMapper.queryProsByCategoryType(type));
         return null;
     }
 

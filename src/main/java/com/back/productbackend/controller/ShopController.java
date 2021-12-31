@@ -1,14 +1,14 @@
 package com.back.productbackend.controller;
 
 import com.back.productbackend.db.model.ProductInfo;
+import com.back.productbackend.db.vo.ProductVO;
 import com.back.productbackend.page.BusinessResult;
+import com.back.productbackend.page.Pagination;
 import com.back.productbackend.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +34,14 @@ public class ShopController {
     public BusinessResult addSome(@RequestBody List<ProductInfo> list) {
         productInfoService.addSome(list);
         return BusinessResult.success(null);
+    }
+
+    @GetMapping("/list")
+    public BusinessResult<Pagination<ProductVO>> list(
+            @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
+            @RequestParam(value = "type", required = false) Integer type
+    ) {
+        return BusinessResult.success(productInfoService.findAll(type, pageIndex, pageSize));
     }
 }
