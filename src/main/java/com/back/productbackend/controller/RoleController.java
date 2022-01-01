@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @Validated
-@RequestMapping("/shop")
-public class ShopController {
+@RequestMapping("/role")
+public class RoleController {
 }
