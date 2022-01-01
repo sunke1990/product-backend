@@ -1,5 +1,7 @@
 package com.back.productbackend.db.entity;
 
+import lombok.Builder;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2022-01-01 22:27:53
  */
+@Builder
 public class SystemUserRole implements Serializable {
     private static final long serialVersionUID = -75918356018597982L;
     
