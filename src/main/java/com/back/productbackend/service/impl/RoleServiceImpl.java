@@ -23,6 +23,7 @@ public class RoleServiceImpl implements RoleService {
     private SystemRoleMapper roleMapper;
 
     @Override
+    @Transactional(readOnly = false,propagation = Propagation.REQUIRED)
     public void addRole(SystemRole systemRole, UserAuthentication auth) {
 
         roleMapper.insert(systemRole);

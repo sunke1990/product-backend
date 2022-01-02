@@ -37,9 +37,10 @@ public class UserAuthentication implements Authentication {
         return roles;
     }
 
-    public UserAuthentication(User user, List<SystemUserRole> roles) {
+    public UserAuthentication(User user, List<SystemUserRole> roles,Integer currentRole) {
         this.user = user;
         this.roles = roles;
+        this.currentRole = currentRole;
     }
 
     @Override

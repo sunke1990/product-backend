@@ -18,13 +18,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor)
                 .order(1)
-                .excludePathPatterns("/doc.html")
-                .excludePathPatterns("/swagger-ui.html")
-                .excludePathPatterns("/error")
-                .excludePathPatterns("/console/getQRcodeId")
-                .excludePathPatterns("/console/getQRcodeStatus")
                 .excludePathPatterns("/role/add")
-                .excludePathPatterns("/user/add")
+                .excludePathPatterns("/user/login")
                 .addPathPatterns("/**");
         WebMvcConfigurer.super.addInterceptors(registry);
     }
