@@ -19,6 +19,16 @@ public class UserAuthentication implements Authentication {
 
     private List<SystemUserRole> roles;
 
+    public Integer getCurrentRole() {
+        return currentRole;
+    }
+
+    public void setCurrentRole(Integer currentRole) {
+        this.currentRole = currentRole;
+    }
+
+    private Integer currentRole;
+
     public User getUser() {
         return user;
     }
@@ -48,8 +58,8 @@ public class UserAuthentication implements Authentication {
     }
 
     @Override
-    public Object getPrincipal() {
-        return null;
+    public User getPrincipal() {
+        return user;
     }
 
     @Override

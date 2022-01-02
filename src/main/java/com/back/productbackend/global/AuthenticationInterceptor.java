@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.annotation.Resource;
@@ -44,6 +45,10 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
                 .roles(roles)
                 .build();
         context.setAuthentication(auth);
+        String xRole = request.getHeader("x-role");
+        if (StringUtils.hasText(xRole)){
+            auth.setCurrentRole(Integer.parseInt(xRole));
+        }
         return true;
     }
 

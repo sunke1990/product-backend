@@ -23,6 +23,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/error")
                 .excludePathPatterns("/console/getQRcodeId")
                 .excludePathPatterns("/console/getQRcodeStatus")
+                .excludePathPatterns("/role/add")
+                .excludePathPatterns("/user/add")
                 .addPathPatterns("/**");
         WebMvcConfigurer.super.addInterceptors(registry);
     }
