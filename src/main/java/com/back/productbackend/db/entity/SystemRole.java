@@ -19,6 +19,8 @@ public class SystemRole implements Serializable {
     * 角色
     */
     private Integer role;
+
+    private String name;
     /**
     * 发布时间
     */
