@@ -1,14 +1,15 @@
 package com.back.productbackend.controller;
 
 import com.back.productbackend.db.entity.SystemUserRole;
+import com.back.productbackend.global.UserAuthentication;
 import com.back.productbackend.page.BusinessResult;
 import com.back.productbackend.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author sunke
@@ -26,6 +27,12 @@ public class UserRoleController {
     public BusinessResult add(@RequestBody SystemUserRole systemUserRole){
         userRoleService.add(systemUserRole);
         return BusinessResult.success(null);
+    }
+
+    @GetMapping("/roles")
+    public BusinessResult<List<Integer>> getRoles(@AuthenticationPrincipal UserAuthentication auth){
+
+        return BusinessResult.success(userRoleService.getRoles(auth));
     }
 
 
