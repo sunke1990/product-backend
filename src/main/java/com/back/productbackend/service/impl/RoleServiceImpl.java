@@ -5,6 +5,7 @@ import com.back.productbackend.db.mapper.SystemRoleMapper;
 import com.back.productbackend.global.UserAuthentication;
 import com.back.productbackend.service.RoleService;
 import com.back.productbackend.utils.TextUtil;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,6 +28,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(readOnly = false,propagation = Propagation.REQUIRED)
     public void addRole(SystemRole systemRole, UserAuthentication auth) {
+        systemRole.setId(IdWorker.getIdStr());
         systemRole.setCreateTime(TextUtil.now());
         systemRole.setUpdateTime(TextUtil.now());
         roleMapper.insert(systemRole);

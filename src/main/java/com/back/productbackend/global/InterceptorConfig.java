@@ -20,6 +20,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .order(1)
                 .excludePathPatterns("/role/add")
                 .excludePathPatterns("/user/login")
+                .excludePathPatterns("/user/role/add")
                 .addPathPatterns("/**");
         WebMvcConfigurer.super.addInterceptors(registry);
     }

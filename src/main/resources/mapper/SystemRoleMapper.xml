@@ -50,8 +50,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into product.system_role(role,name, create_time, update_time)
-        values (#{role},#{name}, #{createTime}, #{updateTime})
+        insert into product.system_role(id,role,name, create_time, update_time)
+        values (#{id},#{role},#{name}, #{createTime}, #{updateTime})
     </insert>
 
     <!--通过主键修改数据-->

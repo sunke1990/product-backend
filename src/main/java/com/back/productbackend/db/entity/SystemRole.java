@@ -1,5 +1,10 @@
 package com.back.productbackend.db.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,6 +14,10 @@ import java.io.Serializable;
  * @author makejava
  * @since 2021-12-31 15:58:18
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SystemRole implements Serializable {
     private static final long serialVersionUID = 333567557310350497L;
     /**
@@ -29,38 +38,5 @@ public class SystemRole implements Serializable {
     * 更新时间
     */
     private Date updateTime;
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Integer getRole() {
-        return role;
-    }
-
-    public void setRole(Integer role) {
-        this.role = role;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 
 }
