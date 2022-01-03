@@ -6,6 +6,7 @@ import com.back.productbackend.global.UserAuthentication;
 import com.back.productbackend.service.UserRoleService;
 import com.back.productbackend.utils.TextUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,9 @@ import java.util.stream.Collectors;
 public class UserRoleServiceImpl implements UserRoleService {
     @Resource
     private SystemUserRoleMapper userRoleMapper;
+
+    @Resource
+    private StringRedisTemplate redisTemplate;
 
     @Override
     @Transactional(readOnly = false,propagation = Propagation.REQUIRED)
