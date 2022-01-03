@@ -12,11 +12,16 @@ import java.util.Date;
 public class JWTUtils {
     private static final String SIGN = "c3Vua2Ug";
 
-    public String getToken(Long userId,String realName){
+    public static String getToken(Long userId,String realName){
         return JWT
                 .create()
                 .withAudience(String.valueOf(userId),realName)
                 .withExpiresAt(new Date())
                 .sign(Algorithm.HMAC256(SIGN));
+    }
+
+    public static void main(String[] args) {
+        String token = getToken(827L, "孙可可");
+        System.out.println(token);
     }
 }

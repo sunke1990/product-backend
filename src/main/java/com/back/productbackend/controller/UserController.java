@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/login")
+    @PostMapping("/add")
     public BusinessResult login(@RequestBody User user){
         userService.login(user);
         return BusinessResult.success(null);

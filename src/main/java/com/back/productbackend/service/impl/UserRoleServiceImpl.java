@@ -26,8 +26,8 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Resource
     private SystemUserRoleMapper userRoleMapper;
 
-    @Resource
-    private StringRedisTemplate redisTemplate;
+   /* @Resource
+    private StringRedisTemplate redisTemplate;*/
 
     @Override
     @Transactional(readOnly = false,propagation = Propagation.REQUIRED)

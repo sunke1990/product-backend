@@ -12,16 +12,29 @@ import javax.annotation.Resource;
  **/
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
+
     @Resource
     private AuthenticationInterceptor authenticationInterceptor;
+
+    @Resource
+    private TokenInterceptor tokenInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationInterceptor)
+        registry.addInterceptor(tokenInterceptor)
                 .order(1)
                 .excludePathPatterns("/role/add")
-                .excludePathPatterns("/user/login")
+                .excludePathPatterns("/user/add")
                 .excludePathPatterns("/user/role/add")
                 .addPathPatterns("/**");
+
+        registry.addInterceptor(authenticationInterceptor)
+                .order(2)
+                .excludePathPatterns("/role/add")
+                .excludePathPatterns("/user/add")
+                .excludePathPatterns("/user/role/add")
+                .addPathPatterns("/**");
+
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }
