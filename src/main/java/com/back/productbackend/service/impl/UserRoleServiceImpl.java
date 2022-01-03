@@ -28,5 +28,6 @@ public class UserRoleServiceImpl implements UserRoleService {
         systemUserRole.setCreateTime(TextUtil.now());
         systemUserRole.setUpdateTime(TextUtil.now());
         userRoleMapper.insert(systemUserRole);
+        log.info("添加用户:{}为店铺:{}管理员:{}",systemUserRole.getUserId(),systemUserRole.getShopId(),systemUserRole.getRoleId());
     }
 }
