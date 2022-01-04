@@ -7,7 +7,7 @@ import java.security.Policy;
  * @author sunke
  * @DATE 2022/1/4
  **/
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited

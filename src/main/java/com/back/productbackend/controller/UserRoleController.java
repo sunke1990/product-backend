@@ -32,7 +32,7 @@ public class UserRoleController {
     @GetMapping("/roles")
     public BusinessResult<List<Integer>> getRoles(@AuthenticationPrincipal UserAuthentication auth){
 
-        return BusinessResult.success(userRoleService.getRoles(auth));
+        return BusinessResult.success(userRoleService.getRoles(auth.getPrincipal().getId(),auth));
     }
 
 

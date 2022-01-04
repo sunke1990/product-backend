@@ -1,6 +1,7 @@
-package com.back.productbackend.aop;
+package com.back.productbackend.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.back.productbackend.aop.CustomizationCache;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -9,15 +10,18 @@ import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractPointcutAdvisor;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.Ordered;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,7 +36,7 @@ public class CustomizationCacheAdvisor extends AbstractPointcutAdvisor implement
     @Lazy
     private StringRedisTemplate stringRedisTemplate;
 
-    Pointcut point = AnnotationMatchingPointcut.forMethodAnnotation(CustomizationCache.class);
+    private final Pointcut point = AnnotationMatchingPointcut.forMethodAnnotation(CustomizationCache.class);
 
     @Override
     public Pointcut getPointcut() {
@@ -40,8 +44,13 @@ public class CustomizationCacheAdvisor extends AbstractPointcutAdvisor implement
     }
 
     @Override
-    public Advice getAdvice() {
+    public MethodInterceptor getAdvice() {
         return this;
+    }
+
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST_PRECEDENCE;
     }
 
     @Override
@@ -57,16 +66,25 @@ public class CustomizationCacheAdvisor extends AbstractPointcutAdvisor implement
 
         StandardEvaluationContext ctx = new StandardEvaluationContext();
         for (int i = 0; i < params.length; i++) {
-            ctx.setVariable(String.format("#p%d", i), args[i]);
+            ctx.setVariable(String.format("p%d", i), args[i]);
+            ctx.setVariable(params[i].getName(),args[i]);
         }
 
         ExpressionParser parser = new SpelExpressionParser();
-        Object result = parser.parseExpression(value).getValue(value);
-        String key = String.format("%s%s%s%s",prefix,method.getDeclaringClass(),method.getName(),result);
-        Object o = invocation.proceed();
+        Object result = parser.parseExpression(value).getValue(ctx);
+        System.out.println("result" + result);
+        String key = String.format("%s%s%s%s", prefix, method.getDeclaringClass(), method.getName(), result);
+        System.out.println("key:"+key);
+        String exist = stringRedisTemplate.opsForValue().get(key);
 
-        stringRedisTemplate.opsForValue().set(key, JSON.toJSONString(o),expiration, TimeUnit.SECONDS);
-
-        return invocation.proceed();
+        if (!StringUtils.hasText(exist)){
+            Object o = invocation.proceed();
+            System.out.println(o);
+            if (Objects.nonNull(o)){
+                stringRedisTemplate.opsForValue().set(key, JSON.toJSONString(o), expiration, TimeUnit.SECONDS);
+            }
+            return o;
+        }
+        return JSON.parseObject(exist,method.getGenericReturnType());
     }
 }

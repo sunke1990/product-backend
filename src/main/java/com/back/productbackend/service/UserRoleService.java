@@ -12,5 +12,5 @@ import java.util.List;
 public interface UserRoleService {
     void add(SystemUserRole systemUserRole);
 
-    List<Integer> getRoles(UserAuthentication auth);
+    List<Integer> getRoles(Long userId,UserAuthentication auth);
 }

@@ -1,6 +1,7 @@
 package com.back.productbackend.service.impl;
 
 import com.back.productbackend.aop.ApiCache;
+import com.back.productbackend.aop.CustomizationCache;
 import com.back.productbackend.db.entity.SystemUserRole;
 import com.back.productbackend.db.mapper.SystemUserRoleMapper;
 import com.back.productbackend.global.UserAuthentication;
@@ -38,8 +39,9 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    @Cacheable(key = "#p0.principal.id",value = "cache")
-    public List<Integer> getRoles(UserAuthentication auth) {
+   //@Cacheable(key = "#p0.principal.id",value = "cache")
+    @CustomizationCache(value = "#p0",expiration = 100)
+    public List<Integer> getRoles(Long userId,UserAuthentication auth) {
         List<SystemUserRole> roles = auth.getRoles();
         return roles.stream().map(SystemUserRole::getRoleId).map(v -> Integer.parseInt(v.toString())).collect(Collectors.toList());
     }
