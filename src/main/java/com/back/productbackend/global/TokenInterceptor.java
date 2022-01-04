@@ -3,7 +3,6 @@ package com.back.productbackend.global;
 import com.back.productbackend.db.entity.User;
 import com.back.productbackend.db.mapper.UserMapper;
 import com.back.productbackend.utils.JWTUtils;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -11,6 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author sunke
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TokenInterceptor extends HandlerInterceptorAdapter {
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Resource
     private UserMapper userMapper;
@@ -33,14 +33,15 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 
         System.out.println(xId);
 
-        boolean hasToken = redisTemplate.hasKey(xId);
+        boolean hasToken = stringRedisTemplate.hasKey(xId);
         if (hasToken){
             return true;
         }
         User user = userMapper.queryById(userId);
         String token = JWTUtils.getToken(userId, user.getRealName());
+        request.setAttribute("token",token);
         System.out.println("----------------------->token"+token);
-        redisTemplate.opsForValue().set(xId,token);
+        stringRedisTemplate.opsForValue().set(xId,token, 1,TimeUnit.HOURS);
         return true;
     }
 

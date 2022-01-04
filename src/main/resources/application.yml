@@ -9,9 +9,15 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       connection-init-sqls: set names utf8mb4;
   redis:
-    timeout: 2s
+    timeout: 200s
     host: localhost
     port: 6379
+
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+
 
 pagehelper:
   reasonable: false # 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据

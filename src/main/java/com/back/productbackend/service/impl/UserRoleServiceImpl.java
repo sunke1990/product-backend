@@ -1,11 +1,13 @@
 package com.back.productbackend.service.impl;
 
+import com.back.productbackend.aop.ApiCache;
 import com.back.productbackend.db.entity.SystemUserRole;
 import com.back.productbackend.db.mapper.SystemUserRoleMapper;
 import com.back.productbackend.global.UserAuthentication;
 import com.back.productbackend.service.UserRoleService;
 import com.back.productbackend.utils.TextUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -39,9 +41,9 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
+    @Cacheable(key = "#p0.principal.id",value = "cache")
     public List<Integer> getRoles(UserAuthentication auth) {
         List<SystemUserRole> roles = auth.getRoles();
-        System.out.println(roles);
         return roles.stream().map(SystemUserRole::getRoleId).map(v -> Integer.parseInt(v.toString())).collect(Collectors.toList());
     }
 }
