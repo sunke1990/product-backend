@@ -40,7 +40,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
    //@Cacheable(key = "#p0.principal.id",value = "cache")
-    @CustomizationCache(value = "#p0",expiration = 100)
+    @CustomizationCache(value = "#p1.principal.id",expiration = 100)
     public List<Integer> getRoles(Long userId,UserAuthentication auth) {
         List<SystemUserRole> roles = auth.getRoles();
         return roles.stream().map(SystemUserRole::getRoleId).map(v -> Integer.parseInt(v.toString())).collect(Collectors.toList());
