@@ -17,7 +17,25 @@ spring:
     type: redis
     redis:
       cache-null-values: false
-
+  rabbitmq:
+    host: 192.18.2.231
+    username: admin
+    password: admin
+    port: 5672
+    #配置虚拟机
+    virtual-host: /sunke
+    ssl:
+      verify-hostname: false
+      enabled: false
+      validate-server-certificate: false
+    connection-timeout: 5s
+    #消息开始手动确认
+    listener:
+      simple:
+        auto-startup: true
+        concurrency: 20
+      direct:
+        auto-startup: true
 
 pagehelper:
   reasonable: false # 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据
