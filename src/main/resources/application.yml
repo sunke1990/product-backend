@@ -29,7 +29,7 @@ spring:
       enabled: false
       validate-server-certificate: false
     connection-timeout: 5s
-    #消息开始手动确认
+    #消息开始自动确认
     listener:
       simple:
         auto-startup: true
