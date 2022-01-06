@@ -1,6 +1,7 @@
 package com.back.productbackend.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.back.productbackend.aop.ApiCache;
 import com.back.productbackend.aop.CustomizationCache;
 import com.back.productbackend.db.entity.SystemUserRole;
@@ -41,7 +42,8 @@ public class UserRoleServiceImpl implements UserRoleService {
         systemUserRole.setUpdateTime(TextUtil.now());
         userRoleMapper.insert(systemUserRole);
         log.info("添加用户:{}为店铺:{}管理员:{}",systemUserRole.getUserId(),systemUserRole.getShopId(),systemUserRole.getRoleId());
-        rabbitTemplate.convertAndSend("pro_test_first",systemUserRole);
+        //rabbitTemplate.convertAndSend("pro_test_first", JSON.toJSONString(systemUserRole));
+        rabbitTemplate.convertAndSend("pro_test_second_ex","pro_test_queen_second_key",JSON.toJSONString(systemUserRole));
     }
 
     @Override
